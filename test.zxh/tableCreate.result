@@ -1,0 +1,77 @@
+Size:
+	[rowan@localhost data]$ du -h
+		....
+		7.7M    ./base/1
+		7.6M    ./base/13793
+		12G     ./base/13794
+		2.1G    ./base/16851
+		0       ./base/pgsql_tmp
+		14G     ./base
+		.....
+	[rowan@localhost data]$ 
+
+	postgres=# select oid,datname,datdba,datlastsysoid,dattablespace,datacl from pg_database;        
+		  oid  |           datname           | datdba | datlastsysoid | dattablespace |           datacl           
+		-------+-----------------------------+--------+---------------+---------------+----------------------------
+		 13794 | postgres                    |     10 |         13793 |          1663 | 
+		 16851 | contrib_regression_pg_strom |     10 |         13793 |          1663 | 
+		     1 | template1                   |     10 |         13793 |          1663 | {=c/rowan,rowan=CTc/rowan}
+		 13793 | template0                   |     10 |         13793 |          1663 | {=c/rowan,rowan=CTc/rowan}
+		(4 rows)
+
+		Time: 0.569 ms
+	postgres=# select oid,* from pg_tablespace ;                                             
+		 oid  |  spcname   | spcowner | spcacl | spcoptions 
+		------+------------+----------+--------+------------
+		 1663 | pg_default |       10 |        | 
+		 1664 | pg_global  |       10 |        | 
+		(2 rows)
+
+		Time: 1.062 ms
+	postgres=# 	
+
+Time:
+	postgres=# \i test-zxh/tableCreate.sql 
+		CREATE TABLE
+		Time: 9.169 ms
+		CREATE TABLE
+		Time: 8.251 ms
+		CREATE TABLE
+		Time: 5.109 ms
+		CREATE TABLE
+		Time: 4.837 ms
+		CREATE TABLE
+		Time: 1.558 ms
+		CREATE TABLE
+		Time: 1.408 ms
+		CREATE TABLE
+		Time: 1.434 ms
+		CREATE TABLE
+		Time: 1.434 ms
+		CREATE TABLE
+		Time: 1.418 ms
+		CREATE TABLE
+		Time: 1.514 ms
+		INSERT 0 100000
+		Time: 219.421 ms
+		INSERT 0 100000
+		Time: 211.590 ms
+		INSERT 0 100000
+		Time: 222.395 ms
+		INSERT 0 100000
+		Time: 212.231 ms
+		INSERT 0 100000
+		Time: 210.945 ms
+		INSERT 0 100000
+		Time: 218.530 ms
+		INSERT 0 100000
+		Time: 210.995 ms
+		INSERT 0 100000
+		Time: 210.392 ms
+
+		INSERT 0 100000000
+		Time: 562247.526 ms (09:22.248)
+
+		INSERT 0 40000000
+		Time: 188494.930 ms (03:08.495)
+	postgres=# 
