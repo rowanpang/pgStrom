@@ -1,5 +1,11 @@
 #!/usr/bin/bash
 
+export CUDA_DEVICE_WAITS_ON_EXCEPTIO=1
+
+if [[ -z $CUDA_VISIBLE_DEVICES ]];then
+	export CUDA_VISIBLE_DEVICES='0,1,2,3'
+fi
+
 source ./env.sh
 
 while getopts "d:l:h" arg
